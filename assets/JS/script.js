@@ -30,28 +30,31 @@ $(document).on("click", ".animalButton", function(){
         url: queryURL,
         method: "GET",
     }).done(function(results){
+        //looping through the array results
         for(var i=0; i,results.data.length; i++) {
             var animalDiv = $('<div class="search-item">');
+            // creating variable to store the rating
             var rating = results.data[i].rating;
+            //creating variable to dynamically render the img tag
             var image = $('<img>');
+            // there two variable will store still version and dynamic version of the GIFs
             var dynamic = results.data[i].images.downsized.url;
             var still = results.data[i].images.downsized_still.url;
             image.attr('src',still);
             image.attr('src',dynamic);
+            //adding the rating into the <p> tag
             var text = $('<p>').text('Rating: '+rating);
+            // appending text with the rating and the image itself to the specific <div> for the every image
             animalDiv.append(text);
             animalDiv.append(image);
+            // finally appending the <div> of the image into the specific field for all results
             $('#search-results').append(animalDiv);
             
         }
     })
 })
 
-$('#animalsearch').on('click', function() {
-    var renderNewButton = $('<button>');
-})
+// Problems I couldn't solve
 
-
-
-
-// var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=l55rKps4jQRoOG8f3AUMuPH8AslOcVP5";
+// 1. I can manage only 1 click for buttons. In order to search for another animal user forced to reload the page. Couldn't solve it.
+// 2. Had problems with grabbing input value and rendering it into the dynamically created button.
